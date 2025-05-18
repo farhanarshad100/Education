@@ -1,11 +1,12 @@
 'use client';
 import Card from "@/Component/Card";
+import List from "@/Component/List";
 import axios from "axios";
 import React from "react";
 
 import { useEffect, useState } from "react";
 
-
+const element = <h3>Hello varible</h3>;
 const About = () =>{
 
 const about = {
@@ -45,6 +46,10 @@ const updateBg = [
 ))}
 </div>
 
+{element}
+
+
+<List/>
         </>
     )
 }
