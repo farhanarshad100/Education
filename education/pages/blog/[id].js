@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -22,7 +23,7 @@ const BlogDetails = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-        <img src={blog.author.avatar} alt='' />
+        <Image src={blog.author.avatar} alt="Example" width={600} height={400} />
       <h1>{blog.title}</h1>
       <p>{blog.author.name}</p>
       <p>{blog.author.bio}</p>

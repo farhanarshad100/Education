@@ -1,10 +1,12 @@
 'use client';
 import Card from "@/Component/Card";
 import List from "@/Component/List";
-import axios from "axios";
-import React from "react";
+import Listobjects from "@/Component/Listobjects";
+import MyComponent from '../../src/Component/MyComponent'
+// import axios from "axios";
+import React, { Component } from "react";
 
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 const element = <h3>Hello varible</h3>;
 const About = () =>{
@@ -14,7 +16,7 @@ const about = {
   description: "Time management is the process of planning and controlling how you spend your time to increase efficiency, effectiveness, and productivity. It involves prioritizing tasks, setting realistic goals, and avoiding distractions to make the most of your available time."
 };
 
-const object = "zeeshan"
+// const object = "zeeshan"
 
 
 const multipulBg = ["bg-amber-500", "bg-amber-600", "bg-amber-700"]
@@ -50,6 +52,8 @@ const updateBg = [
 
 
 <List/>
+<Listobjects/>
+<MyComponent />
         </>
     )
 }

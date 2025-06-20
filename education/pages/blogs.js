@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -17,7 +18,7 @@ const BlogList = () => {
         {blogs.map((post) => (
           <li className='bg-gray-400 p-4 text-center' key={post.id} style={{ marginBottom: '20px' }}>
             <Link href={`/blog/${post.id}`}>
-            <img src={post.author.avatar} alt='' />
+            <Image src={post.author.avatar}  alt="Example" width={600} height={400} />
               <h2>{post.title}</h2>
               <p>{post.author.name}</p>
               <p>{post.author.bio}</p>
