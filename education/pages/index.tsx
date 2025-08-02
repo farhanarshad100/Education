@@ -1,18 +1,39 @@
-// import Image from "next/image";
-// import { Geist, Geist_Mono } from "next/font/google";
+import React, { useEffect, useState } from 'react';
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
+function StatusComponent() {
+const isLoggedIn = true;
+const nameUpdate = ""
 
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
+// map 
+const numbers = [1, 2, 3, 4, 5];
+const double = numbers.map (n => n * 2);
+console.log(double)
 
-export default function Home() {
+
+const newNumber = [2,3,4,5,6];
+const changeNumber = newNumber.map(h => h * 2 )
+console.log(changeNumber)
+
+
+
+
+
+
   return (
-<h1>home</h1>
+    <div>
+      <h2>Status:</h2>
+      
+    {isLoggedIn ? <p>Hello Farhan1</p> : <p>please show name</p>}
+  {/* <h1>{nameUpdate ? `Hello, ${nameUpdate}`: `Hello guest`}</h1> */}
+
+<h1>Hello, {nameUpdate ? nameUpdate : "Guest"}</h1>
+
+{/* <p key={number}>Doubled: {number * 2}</p> */}
+ {double}
+
+
+    </div>
   );
 }
+
+export default StatusComponent;
