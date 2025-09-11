@@ -1,3 +1,5 @@
+import TaskManager from '@/Component/Task/TaskManager';
+
 import React, { useEffect, useState } from 'react';
 
 function StatusComponent() {
@@ -30,8 +32,74 @@ const people = [
 ];
 
 
+// const myprmise = new Promise((resolved, rejected) => {
+//   const a = 2;
+//   const b = 4;
+//   const c = a + b;
+//   if (c === 4) {
+//     resolved('if resoleved match okay');
+//   } else {
+//     rejected('no it is not macting');
+//   }
+// });
+
+// myprmise
+//   .then(m => {
+//     console.log(m);
+//   })
+//   .catch(m => {
+//     console.log(m);
+//   });
+
+// const p = new Promise ((resolve, rejects) =>{
+//   setTimeout(() =>{
+//   const a = 1 + 2;
+//   if (a  === 2){
+//     resolve ('done')
+//   }else(
+//     rejects ('found')
+//   )
+// }, 4000);
+//   })
+
+// p.then (m =>{
+//   console.log("if find true show massage"+ m)
+// }).catch( m =>{
+//     console.log("it is not " + m)
+// })
+
+
+
+const p = new Promise ((resolve, rejects) =>{
+  console.log("Promise is pending...")
+  setTimeout(() =>{
+    resolve(" after 5 second")
+  }, 5000)
+})
+
+p.then((m) =>{
+  console.log("done" + m)
+}).catch((m) =>{
+  console.log("not found" + m)
+})
+
+// call back function
+
+const newTest = (a, b, opretion) =>{
+  return opretion (a, b)
+} 
+
+newTest(3, 4, function (num1 , num2){
+return num1 + num2;
+})
+console.log()
+
+
+
   return (
     <div>
+
+      <TaskManager/>
       <h2>Status:</h2>
       
     {isLoggedIn ? <p>Hello Farhan1</p> : <p>please show name</p>}
