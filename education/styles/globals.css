@@ -24,3 +24,11 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.alsoLike .slick-slide {
+  padding: 0 12px;
+}
+
+.alsoLike.slick-list {
+  margin: 0 -12px;
+}

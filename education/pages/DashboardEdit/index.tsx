@@ -1,11 +1,11 @@
 import React from 'react'
-import Product from '@/Component/Product'
+import Edit from '@/Component/Dashboard/Edit'
 const index = () => {
-
   return (
-    <>
-    <Product/>
-    </>
+    <div>
+<Edit/>
+    
+    </div>
   )
 }
 

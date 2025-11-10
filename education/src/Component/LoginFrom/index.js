@@ -1,79 +1,80 @@
-import React, {useEffect, useState} from "react"
+import React, { useState } from "react";
 
-const LoginFrom = () =>{
-    const [email, setEmail] = useState ("");
-    const [password, setPassword] = useState ("");
-    const [message, setMessage] = useState ("");
-    const [error, setError] = useState("");
-    const handleSubmit = async (e) => {
-  e.preventDefault();
+function LoginForm() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
-  // Basic validation
-  if (!email && !password) {
-    setError("Please fill in both fields");
-    return;
-  } else if (!email) {
-    setError("Please enter your email");
-    return;
-  } else if (!password) {
-    setError("Please enter your password");
-    return;
-  } else {
-    setError("");
-  }
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-  alert("Form submitted");
+    try {
+      const res = await fetch("https://dummyjson.com/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          username: username,
+          password: password,
+        }),
+      });
 
-  try {
-    const response = await fetch("https://example.com/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+      const data = await res.json();
 
-    const data = await response.json();
+      if (res.ok) {
+        setMessage(`Login successful! Welcome, ${data.firstName}`);
+ 
 
-    if (response.ok) {
-      setMessage("Login successful!");
-      console.log("User token:", data.token);
-      // Example: localStorage.setItem("token", data.token);
-      // navigate("/dashboard");
-    } else {
-      setMessage(data.message || "Invalid credentials");
+        console.log("User data:", data);
+      } else {
+        setMessage(`Login failed: ${data.message || "Invalid credentials"}`);
+ 
+      }
+              setTimeout(() => {
+    setMessage("");
+  }, 5000);
+    } catch (error) {
+      setMessage("Something went wrong!");
+      console.error(error);
     }
-  } catch (error) {
-    console.error("Login error:", error);
-    setMessage("Something went wrong!");
-  }
-};
+  };
 
-    return(
-        <>
- <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-<form onSubmit={handleSubmit}>
-<h2>Login</h2>
-<input type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-3 focus:outline-none focus:border-blue-500"
-         />
-   <input
+  return (
+    <div style={{ maxWidth: "300px", margin: "50px auto" }}>
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+          style={{ display: "block", marginBottom: "10px", width: "100%" }}
+        />
+         <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          style={{ display: "block", marginBottom: "10px", width: "100%" }}
+        />
+        <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-3 focus:outline-none focus:border-blue-500"
+          required
+          style={{ display: "block", marginBottom: "10px", width: "100%" }}
         />
-         {password && <p className="text-red-500">{password}</p>}
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
-        >
+        <button type="submit" style={{ width: "100%" }}>
           Login
         </button>
-
-        {message && <p className="text-red-500">{message}</p>}
-</form>
-
+      </form>
+      {message && <p style={{ marginTop: "10px" }}>{message}</p>}
     </div>
-        </>
-    )
+  );
 }
-export default LoginFrom
+
+export default LoginForm;

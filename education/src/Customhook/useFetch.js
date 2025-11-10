@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-const Usefetch = () => {
-    const [data, setData] = useState(null);
+import React, { useEffect, useState } from "react";
+const Usefetch = (initialValues = {}) => {
+const [value, setValues] = useState (initialValues)
     return(
 <>
 <h1>Hello</h1>

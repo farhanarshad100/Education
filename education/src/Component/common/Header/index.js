@@ -1,66 +1,109 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { toggleTheme } from "@/redux/themeSlice";
-
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  IconButton,
+  Link,
+  List,
+  ListItem,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import { navItems } from "./navData";
+import Image from "next/image";
 const Header = () => {
-  const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.items);
-  const [showCart, setShowCart] = useState(false);
-  const themeMode = useSelector((state) => state.theme.mode);
-
-
-
-
   return (
-    <header
-      className={`py-4 px-6 flex justify-between ${
-        themeMode === "light" ? "bg-white text-black" : "bg-black text-white"
-      }`}
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "#fff", boxShadow: "none", py:2.5 }}
     >
-      <h1 className="text-2xl font-bold">My Website</h1>
+      <Container
+  maxWidth={false} // disables default MUI width limits
+  sx={{
+    maxWidth: "1400px",
+  }}
+>
+        <Toolbar disableGutters
+          sx={{ display: "flex", justifyContent: "space-between",  }}
+        >
+          <Typography variant="h6" sx={{ color: "#000" }}>
+            Art Gallery
+          </Typography>
 
-      <div
-        className="cursor-pointer relative"
-        onClick={() => setShowCart((prev) => !prev)}
-      >
-        <h3 className="text-right">
-          Cart Items: {cartItems.length}
-        </h3>
-
-        {showCart && (
-          <div className="absolute right-0 mt-2 w-80 bg-white text-black shadow-lg rounded-lg p-4 z-50 max-h-80 overflow-y-auto">
-            {cartItems.length === 0 ? (
-              <p className="text-center">No items in cart</p>
-            ) : (
-              cartItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-center gap-3 border-b pb-2 mb-2"
-                >
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-12 h-12 object-contain"
+          <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
+            {navItems.map((item) => (
+              <Button
+                key={item.id}
+                component={Link}
+                to={item.path}
+                sx={{
+                  color: "#000",
+                  textTransform: "none",
+                  fontSize: "14px",
+                  textTransform: "uppercase",
+                  "&:hover": { color: "#0b08c8" },
+                }}
+              >
+                {item.label}
+              </Button>
+            ))}
+            <Box className="iconSection">
+              <List
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                  paddingLeft: "20px",
+                }}
+              >
+                <ListItem disablePadding sx={{ width: "auto" }}>
+                  <Image
+                    src="/images/search.svg"
+                    alt="Search"
+                    width={22}
+                    height={22}
+                    priority
                   />
-                  <div>
-                    <p className="font-semibold text-sm">
-                      {item.title.slice(0, 25)}...
-                    </p>
-                    <p className="text-sm text-gray-600">${item.price}</p>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        )}
-      </div>
-       <button
-        onClick={() => dispatch(toggleTheme())}
-        className="px-4 py-2 border rounded"
-      >
-        Switch to {themeMode === "light" ? "Dark" : "Light"} Mode
-      </button>
-    </header>
+                </ListItem>
+                <ListItem disablePadding sx={{ width: "auto" }}>
+                  <Image
+                    src="/images/cart.svg"
+                    alt="Cart"
+                    width={22}
+                    height={22}
+                    priority
+                  />
+                </ListItem>
+
+                <ListItem disablePadding sx={{ width: "auto" }}>
+                  <Image
+                    src="/images/heart.svg"
+                    alt="Wishlist"
+                    width={22}
+                    height={22}
+                    priority
+                  />
+                </ListItem>
+
+                <ListItem disablePadding sx={{ width: "auto" }}>
+                  <Image
+                    src="/images/user-circle.svg"
+                    alt="User"
+                    width={22}
+                    height={22}
+                    priority
+                  />
+                </ListItem>
+              </List>
+            </Box>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 
